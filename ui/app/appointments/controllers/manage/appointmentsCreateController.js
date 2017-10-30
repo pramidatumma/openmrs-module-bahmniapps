@@ -400,7 +400,6 @@ angular.module('bahmni.appointments')
                     }
                 }
             );
-          
             var newAppointmentStartingEndingBeforeExistingAppointment = function (existingStart, newStart, newEnd) {
                 return newEnd <= existingStart;
             };
