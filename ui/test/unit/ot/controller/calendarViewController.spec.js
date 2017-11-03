@@ -474,4 +474,12 @@ describe("calendarViewController", function () {
         createController();
         expect(scope.viewDate).toBe(stateParams.viewDate);
     });
+
+    it("should appointmentList include 'postponed' and 'cancelled' status when user comes from surgical queues to listview", function () {
+        state.view = 'List View';
+        createController();
+        expect(scope.appointmentStatusList.length).toEqual(4);
+        expect(scope.appointmentStatusList).toEqual([{name: Bahmni.OT.Constants.scheduled}, {name: Bahmni.OT.Constants.completed},
+            {name: Bahmni.OT.Constants.postponed}, {name: Bahmni.OT.Constants.cancelled}]);
+    });
 });
