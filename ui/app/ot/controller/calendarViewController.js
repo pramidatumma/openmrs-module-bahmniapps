@@ -302,7 +302,7 @@ angular.module('bahmni.ot')
                         });
                     }
                     if (newValue === 'List View') {
-                        setAppointmentStatusList(newValue)
+                        setAppointmentStatusList(newValue);
                     }
                     $scope.applyFilters();
                 }
