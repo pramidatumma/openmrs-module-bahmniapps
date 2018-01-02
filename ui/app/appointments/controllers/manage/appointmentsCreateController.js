@@ -27,7 +27,7 @@ angular.module('bahmni.appointments')
             };
             var init = function () {
                 wireAutocompleteEvents();
-                var providerCurrentAvailability = "No";
+                var providerCurrentAvailability = "False";
                 if (!_.isEmpty(appointmentContext) && !_.isEmpty(appointmentContext.appointment) && !_.isEmpty(appointmentContext.appointment.provider)) {
                     providerCurrentAvailability = isProviderCurrentlyAvailableForAppointments(appointmentContext.appointment.provider, appointmentCreateConfig);
                 }
