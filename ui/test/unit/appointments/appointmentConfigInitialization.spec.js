@@ -23,24 +23,34 @@ describe('AppointmentConfigInitialization', function () {
         appointmentsServiceService.getService.and.returnValue(specUtil.simplePromise({data: appointmentServices[0]}));
 
         providerService = jasmine.createSpyObj('providerService', ['list']);
-        providers = [
-            {person: {display: 'Superman'}, attributes: []},
+        providers =[
+            {person: {display: 'Superman', uuid: "uuid5"}, attributes: []},
             {
-                person: {display: 'Unknown Provider'},
-                attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}]
+                person: {display: 'Unknown Provider', uuid: "uuid1"},
+                attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}],
+                uuid: "uuid1",
+                retired: false
             },
             {
-                person: {display: 'mohima'},
-                attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: true}]
+                person: {display: 'mohima', uuid: "uuid4"},
+                attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: true}],
+                retired: false
             },
             {
-                person: {display: 'mahmoud_h'},
+                person: {display: 'mahmoud_h', uuid: "uuid3"},
                 attributes: [{attributeType: {display: "Available for appointments"}, value: false, voided: false}]
+            }, {
+                person: {display: 'Saikumar', uuid: "uuid2"},
+                attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}],
+                uuid: "uuid1",
+                retired: true
             }
         ];
         availableProviders = [{
-            person: {display: 'Unknown Provider'},
-            attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}]
+            person: {display: 'Unknown Provider', uuid: "uuid1"},
+            attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}],
+            uuid: "uuid1",
+            retired: false
         }];
         providerService.list.and.returnValue(specUtil.simplePromise({data: {results: providers}}));
 
@@ -80,6 +90,13 @@ describe('AppointmentConfigInitialization', function () {
             expect(config.specialities).toBe(specialities);
             expect(config.services).toBe(appointmentServices);
             expect(config.providers).toEqual(availableProviders);
+            done();
+        });
+    });
+
+    it('should not include retired providers in providers list', function (done) {
+        appointmentConfig(appointmentContext).then(function (response) {
+            expect(response.providers).toEqual(availableProviders);
             done();
         });
     });

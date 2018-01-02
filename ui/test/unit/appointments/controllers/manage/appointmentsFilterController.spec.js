@@ -35,19 +35,26 @@ describe('AppointmentsFilterController', function () {
     var providers = {
         data: {
             results: [
-                {person: {display: 'Superman'}, attributes: []},
+                {person: {display: 'Superman', uuid: "uuid5"}, attributes: []},
                 {
                     person: {display: 'Unknown Provider', uuid: "uuid1"},
                     attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}],
-                    uuid: "uuid1"
+                    uuid: "uuid1",
+                    retired: false
                 },
                 {
-                    person: {display: 'mohima'},
-                    attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: true}]
+                    person: {display: 'mohima', uuid: "uuid4"},
+                    attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: true}],
+                    retired: false
                 },
                 {
-                    person: {display: 'mahmoud_h'},
+                    person: {display: 'mahmoud_h', uuid: "uuid3"},
                     attributes: [{attributeType: {display: "Available for appointments"}, value: false, voided: false}]
+                }, {
+                    person: {display: 'Saikumar', uuid: "uuid2"},
+                    attributes: [{attributeType: {display: "Available for appointments"}, value: true, voided: false}],
+                    uuid: "uuid1",
+                    retired: true
                 }
             ]
         }
@@ -74,7 +81,7 @@ describe('AppointmentsFilterController', function () {
             state.current = {tabName: "list"};
             $httpBackend.expectGET('../i18n/appointments/locale_en.json').respond('<div></div>')
             $httpBackend.expectGET('/bahmni_config/openmrs/i18n/appointments/locale_en.json').respond('<div></div>')
-            $httpBackend.expectGET('/openmrs/ws/rest/v1/provider?v=custom:(display,person,uuid,attributes:(attributeType:(display),value,voided))').respond('<div></div>')
+            $httpBackend.expectGET('/openmrs/ws/rest/v1/provider?v=custom:(display,person,uuid,retired,attributes:(attributeType:(display),value,voided))').respond('<div></div>')
         });
     });
 
@@ -731,5 +738,11 @@ describe('AppointmentsFilterController', function () {
         q.all.and.returnValue(specUtil.simplePromise([servicesWithTypes, providers]));
         createController();
         expect(scope.providers.length).toBe(2)
-    })
+    });
+
+    it("should not include retired providers", function () {
+        q.all.and.returnValue(specUtil.simplePromise([servicesWithTypes, providers]));
+        createController();
+        expect(scope.providers.length).toBe(2)
+    });
 });
