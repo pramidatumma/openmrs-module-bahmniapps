@@ -20,6 +20,9 @@
                 {{appointment.status}}
             </td>
             <td>
+                {{appointment.derivedAttributes.expectedStartDate | date : 'EEEE'}}
+            </td>
+            <td>
                 {{appointment.derivedAttributes.expectedStartDate | bahmniDate}}
             </td>
             <td>

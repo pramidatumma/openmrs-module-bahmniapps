@@ -8,6 +8,7 @@ angular.module('bahmni.ot')
             var endDatetime = moment(startDatetime).endOf('day').toDate();
             $scope.tableInfo = [
                 {heading: 'Status', sortInfo: 'status'},
+                {heading: 'Day', sortInfo: 'derivedAttributes.expectedStartDate'},
                 {heading: 'Date', sortInfo: 'derivedAttributes.expectedStartDate'},
                 {heading: 'Identifier', sortInfo: 'derivedAttributes.patientIdentifier'},
                 {heading: 'Patient Name', sortInfo: 'derivedAttributes.patientName'},
