@@ -59,7 +59,7 @@ angular.module('bahmni.ot')
                     includeVoided: includeVoided || false,
                     v: "custom:(id,uuid," +
                     "provider:(uuid,person:(uuid,display),attributes:(attributeType:(display),value,voided))," +
-                    "location:(uuid,name),startDatetime,endDatetime,surgicalAppointments:(id,uuid,patient:(uuid,display)," +
+                    "location:(uuid,name),startDatetime,endDatetime,surgicalAppointments:(id,uuid,patient:(uuid,display,person:(age))," +
                     "actualStartDatetime,actualEndDatetime,status,notes,sortWeight,surgicalAppointmentAttributes))"
                 },
                 withCredentials: true

@@ -11,6 +11,7 @@ angular.module('bahmni.ot')
                 {heading: 'Date', sortInfo: 'derivedAttributes.expectedStartDate'},
                 {heading: 'Identifier', sortInfo: 'derivedAttributes.patientIdentifier'},
                 {heading: 'Patient Name', sortInfo: 'derivedAttributes.patientName'},
+                {heading: 'Patient Age', sortInfo: 'derivedAttributes.patientAge'},
                 {heading: 'Start Time', sortInfo: 'derivedAttributes.expectedStartTime'},
                 {heading: 'Est Time', sortInfo: 'derivedAttributes.duration'},
                 {heading: 'Actual Time', sortInfo: 'actualStartDatetime'},
@@ -47,6 +48,7 @@ angular.module('bahmni.ot')
                         );
                         mappedAppointment.derivedAttributes.expectedStartDate = moment(blockStartDatetime).startOf('day').toDate();
                         mappedAppointment.derivedAttributes.patientIdentifier = mappedAppointment.patient.display.split(' - ')[0];
+                        mappedAppointment.derivedAttributes.patientAge = mappedAppointment.patient.person.age;
                         mappedAppointment.derivedAttributes.patientName = mappedAppointment.patient.display.split(' - ')[1];
                         if (mappedAppointment.status === Bahmni.OT.Constants.completed || mappedAppointment.status === Bahmni.OT.Constants.scheduled) {
                             mappedAppointment.derivedAttributes.expectedStartTime = blockStartDatetime;
