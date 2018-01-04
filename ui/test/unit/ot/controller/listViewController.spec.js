@@ -654,4 +654,22 @@ describe('listViewController', function () {
         var isCancelled = scope.isStatusCancelled('SCHEDULED');
         expect(isCancelled).toBeFalsy();
     });
+
+    it("should have bed location and bed id in table info", function () {
+        scope.filterParams = {
+            providers: [],
+            locations: {"OT 1": true, "OT 2": true, "OT 3": true},
+            statusList: []
+        };
+        var event = {
+            stopPropagation: function () {
+            }
+        };
+        createController();
+        expect(scope.tableInfo.length).toBe(21);
+        expect(scope.tableInfo[19].heading).toBe("Bed Location");
+        expect(scope.tableInfo[19].sortInfo).toBe("bedLocation");
+        expect(scope.tableInfo[20].heading).toBe("Bed ID");
+        expect(scope.tableInfo[20].sortInfo).toBe("bedId");
+    });
 });

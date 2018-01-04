@@ -60,7 +60,7 @@ angular.module('bahmni.ot')
                     v: "custom:(id,uuid," +
                     "provider:(uuid,person:(uuid,display),attributes:(attributeType:(display),value,voided))," +
                     "location:(uuid,name),startDatetime,endDatetime,surgicalAppointments:(id,uuid,patient:(uuid,display,person:(age))," +
-                    "actualStartDatetime,actualEndDatetime,status,notes,sortWeight,surgicalAppointmentAttributes))"
+                    "actualStartDatetime,actualEndDatetime,status,notes,sortWeight,bedNumber,bedLocation,surgicalAppointmentAttributes))"
                 },
                 withCredentials: true
             });

@@ -25,7 +25,9 @@ angular.module('bahmni.ot')
                 {heading: 'Anaesthetist', sortInfo: 'surgicalAppointmentAttributes.anaesthetist.value'},
                 {heading: 'Scrub Nurse', sortInfo: 'surgicalAppointmentAttributes.scrubNurse.value'},
                 {heading: 'Circulating Nurse', sortInfo: 'surgicalAppointmentAttributes.circulatingNurse.value'},
-                {heading: 'Status Change Notes', sortInfo: 'notes'}];
+                {heading: 'Status Change Notes', sortInfo: 'notes'},
+                {heading: 'Bed Location', sortInfo: 'bedLocation'},
+                {heading: 'Bed ID', sortInfo: 'bedId'}];
 
             var filterSurgicalBlocksAndMapAppointmentsForDisplay = function (surgicalBlocks) {
                 var clonedSurgicalBlocks = _.cloneDeep(surgicalBlocks);
