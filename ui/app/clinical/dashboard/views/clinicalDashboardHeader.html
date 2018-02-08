@@ -85,8 +85,8 @@
             <div class="dashboard-header-right-wrapper">
                 <div ng-if="::clinicalDashboardConfig.quickPrints" class="fl print-list-wrapper" toggle="togglePrintList">
                     <button ng-if="clinicalDashboardConfig.showPrint()" class="dialog-button-group"
-                            accesskey="{{'CLINICAL_PRINT_ACCESS_KEY'| translate}}" ng-bind-html="'CLINICAL_PRINT_TRANSLATION_KEY'|translate">
-                        <i class="fa fa-print"></i>
+                            accesskey="{{'CLINICAL_PRINT_ACCESS_KEY'| translate}}">
+                        <span ng-bind-html="'CLINICAL_PRINT_TRANSLATION_KEY'|translate"></span> <i class="fa fa-print"></i> <i class="fa fa-caret-down"></i>
                     </button>
                     <ul>
                         <li accesskey="{{::tab.printing.shortcutKey}}" ng-repeat="tab in ::printList" ng-click="::printDashboard(tab)">
@@ -114,7 +114,7 @@
                     accesskey="{{'CONSULTATION_SHORTCUT_KEY' | translate}}"
                     ng-bind-html="'CONSULTATION_TAB_KEY' | translate">
                  </a>
-                <a class="btn--right btn--success " title="Open in new window"
+                <a class="btn--right btn--success " title="{{'OPEN_IN_NEW_WINDOW'|translate}}"
                    ng-if="visitHistory.activeVisit || retrospectiveEntry"
                    ng-click="openConsultationInNewTab()"><i class="fa fa-external-link"></i></a>
            </span>
