@@ -129,8 +129,21 @@ angular.module('bahmni.clinical')
 
             var mapConcept = function (result) {
                 return _.map(result.data, function (concept) {
-                    var response = {
-                        value: concept.matchedName || concept.conceptName,
+                    if (concept.conceptName === concept.matchedName) {
+                        return {
+                            value: concept.matchedName,
+                            concept: {
+                                name: concept.conceptName,
+                                uuid: concept.conceptUuid
+                            },
+                            lookup: {
+                                name: concept.conceptName,
+                                uuid: concept.conceptUuid
+                            }
+                        };
+                    }
+                    return {
+                        value: concept.matchedName + "=>" + concept.conceptName,
                         concept: {
                             name: concept.conceptName,
                             uuid: concept.conceptUuid
@@ -140,14 +153,6 @@ angular.module('bahmni.clinical')
                             uuid: concept.conceptUuid
                         }
                     };
-
-                    if (concept.matchedName && concept.matchedName !== concept.conceptName) {
-                        response.value = response.value + " => " + concept.conceptName;
-                    }
-                    if (concept.code) {
-                        response.value = response.value + " (" + concept.code + ")";
-                    }
-                    return response;
                 });
             };
 

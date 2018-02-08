@@ -7,9 +7,8 @@ angular.module('bahmni.clinical')
             $scope.consultation.childOrders = $scope.consultation.childOrders || [];
             $scope.allOrdersTemplates = allOrderables;
             var RadiologyOrderOptionsConfig = appService.getAppDescriptor().getConfig("enableRadiologyOrderOptions");
-            var LabOrderOptionsConfig = appService.getAppDescriptor().getConfig("enableLabOrderOptions");
             $scope.enableRadiologyOrderOptions = RadiologyOrderOptionsConfig ? RadiologyOrderOptionsConfig.value : null;
-            $scope.enableLabOrderOptions = LabOrderOptionsConfig ? LabOrderOptionsConfig.value : null;
+
             var testConceptToParentsMapping = {}; // A child concept could be part of multiple parent panels
 
             var collapseExistingActiveSection = function (section) {
@@ -224,26 +223,18 @@ angular.module('bahmni.clinical')
             };
 
             $scope.isPrintShown = function (isOrderSaved) {
-                var configuredOptions = getConfiguredOptions();
-                return _.some(configuredOptions, function (option) {
+                return _.some($scope.enableRadiologyOrderOptions, function (option) {
                     return option.toLowerCase() === 'needsprint';
                 })
-                && !isOrderSaved;
+                &&
+                $scope.activeTab.name == 'Radiology' && !isOrderSaved;
             };
             $scope.isUrgent = function () {
-                var configuredOptions = getConfiguredOptions();
-                return _.some(configuredOptions, function (option) {
+                return _.some($scope.enableRadiologyOrderOptions, function (option) {
                     return option.toLowerCase() === 'urgent';
-                });
-            };
-            var getConfiguredOptions = function () {
-                var configuredOptions = null;
-                if ($scope.activeTab.name == 'Radiology') {
-                    configuredOptions = $scope.enableRadiologyOrderOptions;
-                } else {
-                    configuredOptions = $scope.enableLabOrderOptions;
-                }
-                return configuredOptions;
+                })
+                &&
+                $scope.activeTab.name == 'Radiology';
             };
             $scope.setEditedFlag = function (order, orderNoteText) {
                 if (order.previousNote !== orderNoteText) {
